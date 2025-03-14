@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Russell 3000 ML Trading Model Dashboard</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="shortcut icon" href="https://qtpylib.io/favicon.ico" type="image/x-icon">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <!-- MDB -->
+    <!-- <link rel="stylesheet" href="css/mdb.min.css" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
+        integrity="sha512-Z1+R2OfJ0a9kp/21IZNhJ5YEOCVRQh/nYktwmhkPF0FoDQH0Ov2wOOwDrlylzJckX6wSJ5VivCURL+JFfLf/xA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- MDB -->
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"
+        integrity="sha512-0RxGTiFXp36+bSbJM+/QSTl1LDQ4pHdDZ8Ua9ZXl454qKSsYu228AOLHYfzx/rm4Dm6I+176ETRF55DpvrHTgw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        td {
+            padding: 0.25em 0.75em !important;
+        }
+
+        th {
+            padding: 0.5em 1.0em !important;
+        }
+
+        .fixnavbar-container {
+            margin-top: 5em;
+            /* Adjust this value based on your navbar height from Claude */
+        }
+    </style>
+</head>
+
+<body>
+    
+    <header>
+        <!-- Navbar -->
+        <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary fixed-top"></nav> -->
+        <!-- <nav class="navbar navbar-light bg-body-tertiary"> -->
+        <!-- <nav class="navbar sticky-top navbar-light bg-body-tertiary"> -->
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
+                aria-controls="navbarExample01" aria-expanded="true" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarLeftAlignExample">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="metrics.html">Metrics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="trades.html">Trades</a>
+                    </li>
+
+                </ul>
+                <!-- Left links -->
+            </div>
+            <!-- Collapsible wrapper -->
+        </div>
+    </nav>
+</div>
+        <!-- Navbar -->
+        <!-- Jumbotron -->
+        <!-- <div class="p-5 text-center bg-light" style="margin-top: 58px;"> -->
+        <!-- <h1 class="mb-3 display-1"></h1> -->
+        <!-- <h4 class="mb-3 display-4"></h4> -->
+        <!-- <p class="text-muted text-uppercase mb-0"></p> -->
+        <!-- <h6 class="text-muted text-uppercase display-6"></h6> -->
+        <!-- <figure class="text-center"> -->
+        <!-- <blockquote class="blockquote"> -->
+        <!-- <p class="text-muted text-uppercase"></p> -->
+        <!-- </blockquote> -->
+        <!-- <figcaption class="blockquote-footer"> -->
+        <!--  -->
+        <!-- </figcaption> -->
+        <!-- </figure> -->
+        <!-- </div> -->
+        <!-- Jumbotron -->
+        <!-- <hr class="hr hr-blurry" /> -->
+
+    </header>
+    <div class="fixnavbar-container">
+        <div class="container-xxl">
+            <!-- <h5 class="text-center">Rolling Stats</h5> -->
+            <!--  -->
+            
+<div class="container">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Model Daily Returns</h5>
+                        <p class="card-text"><table class="table table-striped table-hover table-sm text-nowrap">
+<thead>
+<tr><th>Date</th><th>AvgReturn</th><th>TotalReturn</th><th>Trades</th></tr>
+</thead>
+<tbody>
+<tr><td>12/03/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.58%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>1.36%</span></td><td>47</td></tr>
+<tr><td>11/03/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.88%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.70%</span></td><td>16</td></tr>
+<tr><td>10/03/2025</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-1.45%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-1.23%</span></td><td>17</td></tr>
+<tr><td>07/03/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>1.24%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.87%</span></td><td>14</td></tr>
+<tr><td>06/03/2025</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.91%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.68%</span></td><td>15</td></tr>
+<tr><td>05/03/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.84%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.63%</span></td><td>15</td></tr>
+<tr><td>04/03/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>1.01%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.70%</span></td><td>14</td></tr>
+<tr><td>03/03/2025</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.23%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.17%</span></td><td>15</td></tr>
+<tr><td>28/02/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>2.78%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>2.36%</span></td><td>17</td></tr>
+<tr><td>27/02/2025</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.59%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.56%</span></td><td>19</td></tr>
+<tr><td>26/02/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>1.01%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.86%</span></td><td>17</td></tr>
+<tr><td>25/02/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.11%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.10%</span></td><td>17</td></tr>
+</tbody>
+</table></p>
+                    </div>
+                </div>
+            </div>
+    
+ 
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Model Weekly Returns</h5>
+                        <p class="card-text"><table class="table table-striped table-hover table-sm text-nowrap">
+<thead>
+<tr><th>Date</th><th>AvgReturn</th><th>TotalReturn</th><th>Trades</th></tr>
+</thead>
+<tbody>
+<tr><td>10/03/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.21%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.83%</span></td><td>80</td></tr>
+<tr><td>03/03/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.37%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>1.35%</span></td><td>73</td></tr>
+<tr><td>24/02/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.54%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>2.35%</span></td><td>87</td></tr>
+<tr><td>17/02/2025</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.17%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.56%</span></td><td>65</td></tr>
+<tr><td>10/02/2025</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.42%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-1.76%</span></td><td>84</td></tr>
+<tr><td>03/02/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.70%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>2.33%</span></td><td>67</td></tr>
+<tr><td>27/01/2025</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.14%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.50%</span></td><td>71</td></tr>
+<tr><td>20/01/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.38%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>1.32%</span></td><td>69</td></tr>
+<tr><td>13/01/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>1.41%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>5.65%</span></td><td>80</td></tr>
+<tr><td>06/01/2025</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.76%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-2.63%</span></td><td>69</td></tr>
+<tr><td>30/12/2024</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.04%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.14%</span></td><td>63</td></tr>
+<tr><td>23/12/2024</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>1.20%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>3.78%</span></td><td>63</td></tr>
+</tbody>
+</table></p>
+                    </div>
+                </div>
+            </div>
+    
+ 
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Model Monthly Returns</h5>
+                        <p class="card-text"><table class="table table-striped table-hover table-sm text-nowrap">
+<thead>
+<tr><th>Date</th><th>AvgReturn</th><th>TotalReturn</th><th>Trades</th></tr>
+</thead>
+<tbody>
+<tr><td>01/03/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.29%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>2.19%</span></td><td>153</td></tr>
+<tr><td>01/02/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.16%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>2.37%</span></td><td>303</td></tr>
+<tr><td>01/01/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.20%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>3.28%</span></td><td>323</td></tr>
+<tr><td>01/12/2024</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.31%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>5.18%</span></td><td>337</td></tr>
+<tr><td>01/11/2024</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.71%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>11.57%</span></td><td>326</td></tr>
+<tr><td>01/10/2024</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.20%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>3.78%</span></td><td>387</td></tr>
+<tr><td>01/09/2024</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.31%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>4.88%</span></td><td>319</td></tr>
+<tr><td>01/08/2024</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.05%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.91%</span></td><td>361</td></tr>
+<tr><td>01/07/2024</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.41%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>6.67%</span></td><td>326</td></tr>
+<tr><td>01/06/2024</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.20%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>2.77%</span></td><td>280</td></tr>
+<tr><td>01/05/2024</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.40%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>7.27%</span></td><td>360</td></tr>
+<tr><td>01/04/2024</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.13%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-2.26%</span></td><td>354</td></tr>
+</tbody>
+</table></p>
+                    </div>
+                </div>
+            </div>
+    
+ 
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Model Quarterly Returns</h5>
+                        <p class="card-text"><table class="table table-striped table-hover table-sm text-nowrap">
+<thead>
+<tr><th>Date</th><th>AvgReturn</th><th>TotalReturn</th><th>Trades</th></tr>
+</thead>
+<tbody>
+<tr><td>01/01/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.20%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>7.84%</span></td><td>779</td></tr>
+<tr><td>01/10/2024</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.39%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>20.52%</span></td><td>1050</td></tr>
+<tr><td>01/07/2024</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.25%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>12.46%</span></td><td>1006</td></tr>
+<tr><td>01/04/2024</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.16%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>7.77%</span></td><td>994</td></tr>
+<tr><td>01/01/2024</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.35%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>18.00%</span></td><td>1026</td></tr>
+<tr><td>01/10/2023</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.91%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>46.23%</span></td><td>1019</td></tr>
+<tr><td>01/07/2023</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.54%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>28.62%</span></td><td>1064</td></tr>
+<tr><td>01/04/2023</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>1.25%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>23.29%</span></td><td>374</td></tr>
+</tbody>
+</table></p>
+                    </div>
+                </div>
+            </div>
+    
+ 
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Model Sector Returns</h5>
+                        <p class="card-text"><table class="table table-striped table-hover table-sm text-nowrap">
+<thead>
+<tr><th>Sector</th><th>AvgReturn</th><th>Trades</th></tr>
+</thead>
+<tbody>
+<tr><td>Financials</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.52%</span></td><td>1305</td></tr>
+<tr><td>Industrials</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.55%</span></td><td>1121</td></tr>
+<tr><td>Health Care</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.31%</span></td><td>875</td></tr>
+<tr><td>Information Technology</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.56%</span></td><td>847</td></tr>
+<tr><td>Consumer Discretionary</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.40%</span></td><td>811</td></tr>
+<tr><td>Real Estate</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.26%</span></td><td>472</td></tr>
+<tr><td>Consumer Staples</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.30%</span></td><td>452</td></tr>
+<tr><td>Energy</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.38%</span></td><td>355</td></tr>
+<tr><td>Materials</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.54%</span></td><td>324</td></tr>
+<tr><td>Communication</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.58%</span></td><td>324</td></tr>
+<tr><td>Utilities</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.38%</span></td><td>260</td></tr>
+<tr><td>Financial Services</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.16%</span></td><td>92</td></tr>
+</tbody>
+</table></p>
+                    </div>
+                </div>
+            </div>
+    
+ 
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Model Ticker Returns [ n: 2475 ]</h5>
+                        <p class="card-text"><table class="table table-striped table-hover table-sm text-nowrap">
+<thead>
+<tr><th>Symbol</th><th>AvgReturn</th><th>TotalReturn</th><th>Trades</th></tr>
+</thead>
+<tbody>
+<tr><td>FCAL</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.02%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.25%</span></td><td>16</td></tr>
+<tr><td>ACV</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.75%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-11.32%</span></td><td>15</td></tr>
+<tr><td>ITT</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>2.51%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>35.12%</span></td><td>14</td></tr>
+<tr><td>HEI</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.81%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>11.38%</span></td><td>14</td></tr>
+<tr><td>CHMI</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-1.22%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-15.80%</span></td><td>13</td></tr>
+<tr><td>AZPN</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.82%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>10.63%</span></td><td>13</td></tr>
+<tr><td>CBOE</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.26%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>3.42%</span></td><td>13</td></tr>
+<tr><td>KTF</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.19%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>2.52%</span></td><td>13</td></tr>
+<tr><td>CACI</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.72%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>9.38%</span></td><td>13</td></tr>
+<tr><td>CFFI</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>1.47%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>19.14%</span></td><td>13</td></tr>
+<tr><td>AXS</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>1.45%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>17.34%</span></td><td>12</td></tr>
+<tr><td>FIZZ</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.58%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>7.02%</span></td><td>12</td></tr>
+</tbody>
+</table></p>
+                    </div>
+                </div>
+            </div>
+    
+ 
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Market Daily Returns</h5>
+                        <p class="card-text"><table class="table table-striped table-hover table-sm text-nowrap">
+<thead>
+<tr><th>Date</th><th>Return</th></tr>
+</thead>
+<tbody>
+<tr><td>12/03/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.56%</span></td></tr>
+<tr><td>11/03/2025</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.60%</span></td></tr>
+<tr><td>10/03/2025</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-2.82%</span></td></tr>
+<tr><td>07/03/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.59%</span></td></tr>
+<tr><td>06/03/2025</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-2.01%</span></td></tr>
+<tr><td>05/03/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>1.18%</span></td></tr>
+<tr><td>04/03/2025</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-1.12%</span></td></tr>
+<tr><td>03/03/2025</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-1.88%</span></td></tr>
+<tr><td>28/02/2025</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>1.55%</span></td></tr>
+<tr><td>27/02/2025</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-1.54%</span></td></tr>
+<tr><td>26/02/2025</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.01%</span></td></tr>
+<tr><td>25/02/2025</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.44%</span></td></tr>
+</tbody>
+</table></p>
+                    </div>
+                </div>
+            </div>
+    
+ 
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Market Weekly Returns</h5>
+                        <p class="card-text"><table class="table table-striped table-hover table-sm text-nowrap">
+<thead>
+<tr><th>Date</th><th>AvgReturn</th><th>TotalReturn</th></tr>
+</thead>
+<tbody>
+<tr><td>2025-03-10 00:00:00</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.96%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.14%</span></td></tr>
+<tr><td>2025-03-03 00:00:00</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.65%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.16%</span></td></tr>
+<tr><td>2025-02-24 00:00:00</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.20%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.05%</span></td></tr>
+<tr><td>2025-02-17 00:00:00</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.51%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.10%</span></td></tr>
+<tr><td>2025-02-10 00:00:00</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.27%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.07%</span></td></tr>
+<tr><td>2025-02-03 00:00:00</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.04%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.01%</span></td></tr>
+<tr><td>2025-01-27 00:00:00</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.18%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.04%</span></td></tr>
+<tr><td>2025-01-20 00:00:00</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.43%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.09%</span></td></tr>
+<tr><td>2025-01-13 00:00:00</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.63%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.16%</span></td></tr>
+<tr><td>2025-01-06 00:00:00</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.51%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.10%</span></td></tr>
+<tr><td>2024-12-30 00:00:00</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.06%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.01%</span></td></tr>
+<tr><td>2024-12-23 00:00:00</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.14%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.03%</span></td></tr>
+</tbody>
+</table></p>
+                    </div>
+                </div>
+            </div>
+    
+ 
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Market Monthly Returns</h5>
+                        <p class="card-text"><table class="table table-striped table-hover table-sm text-nowrap">
+<thead>
+<tr><th>Date</th><th>AvgReturn</th><th>TotalReturn</th></tr>
+</thead>
+<tbody>
+<tr><td>2025-03-01 00:00:00</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.76%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.30%</span></td></tr>
+<tr><td>2025-02-01 00:00:00</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.10%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.09%</span></td></tr>
+<tr><td>2025-01-01 00:00:00</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.16%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.16%</span></td></tr>
+<tr><td>2024-12-01 00:00:00</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.16%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.17%</span></td></tr>
+<tr><td>2024-11-01 00:00:00</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.33%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.33%</span></td></tr>
+<tr><td>2024-10-01 00:00:00</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.03%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.03%</span></td></tr>
+<tr><td>2024-09-01 00:00:00</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.09%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.09%</span></td></tr>
+<tr><td>2024-08-01 00:00:00</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.11%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.12%</span></td></tr>
+<tr><td>2024-07-01 00:00:00</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.09%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.10%</span></td></tr>
+<tr><td>2024-06-01 00:00:00</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.16%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.15%</span></td></tr>
+<tr><td>2024-05-01 00:00:00</td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.20%</span></td><td><span class="text-success"><i class="fas fa-caret-up me-1"></i>0.21%</span></td></tr>
+<tr><td>2024-04-01 00:00:00</td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.20%</span></td><td><span class="text-danger"><i class="fas fa-caret-down me-1"></i>-0.22%</span></td></tr>
+</tbody>
+</table></p>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+    <footer class="bg-light text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.025);">
+        © 2025 Copyright 
+    </div>
+    <!-- Copyright -->
+</footer>
+
+    
+</body>
+
+</html>
